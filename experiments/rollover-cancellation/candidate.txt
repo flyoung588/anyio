@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.12, pytest-9.2.0, pluggy-1.7.0 -- /Users/feiyang/.codex/.chatgpt-projects/g-p-6a8bc3896c108191b1914e9af9ac0262/co-do-round2/track-d/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/feiyang/.codex/.chatgpt-projects/g-p-6a8bc3896c108191b1914e9af9ac0262
+configfile: pyproject.toml
+collecting ... collected 4 items
+
+co-do-round2/track-d/probe_rollover.py::test_cancellation_during_rollover[asyncio] PASSED [ 25%]
+co-do-round2/track-d/probe_rollover.py::test_cancellation_during_rollover[trio] PASSED [ 50%]
+co-do-round2/track-d/probe_rollover.py::test_failed_rollover_retry[asyncio] PASSED [ 75%]
+co-do-round2/track-d/probe_rollover.py::test_failed_rollover_retry[trio] PASSED [100%]
+
+============================== 4 passed in 0.04s ===============================

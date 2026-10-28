@@ -1,0 +1,51 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.12, pytest-9.2.0, pluggy-1.7.0 -- /Users/feiyang/.codex/.chatgpt-projects/g-p-6a8bc3896c108191b1914e9af9ac0262/co-do-round2/track-d/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/feiyang/.codex/.chatgpt-projects/g-p-6a8bc3896c108191b1914e9af9ac0262
+configfile: pyproject.toml
+collecting ... collected 4 items
+
+co-do-round2/track-d/probe_rollover.py::test_cancellation_during_rollover[asyncio] PASSED [ 25%]
+co-do-round2/track-d/probe_rollover.py::test_cancellation_during_rollover[trio] PASSED [ 50%]
+co-do-round2/track-d/probe_rollover.py::test_failed_rollover_retry[asyncio] FAILED [ 75%]
+co-do-round2/track-d/probe_rollover.py::test_failed_rollover_retry[trio] FAILED [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_failed_rollover_retry[asyncio] ______________________
+
+anyio_backend = 'asyncio'
+tmp_path = PosixPath('/private/var/folders/qw/scc1qs1x3sgf826x2f24v5tw0000gn/T/pytest-of-feiyang/pytest-2/test_failed_rollover_retry_asy0')
+
+    @pytest.mark.parametrize('anyio_backend', ['asyncio', 'trio'])
+    @pytest.mark.anyio
+    async def test_failed_rollover_retry(anyio_backend, tmp_path):
+        missing = tmp_path / 'missing'
+        async with anyio.SpooledTemporaryFile(max_size=8, dir=missing) as f:
+            await f.write(b'aaaa')
+            with pytest.raises(FileNotFoundError):
+                await f.write(b'bbbbbbbb')
+>           assert await f.tell() == 12
+E           assert 0 == 12
+
+co-do-round2/track-d/probe_rollover.py:49: AssertionError
+_______________________ test_failed_rollover_retry[trio] _______________________
+
+anyio_backend = 'trio'
+tmp_path = PosixPath('/private/var/folders/qw/scc1qs1x3sgf826x2f24v5tw0000gn/T/pytest-of-feiyang/pytest-2/test_failed_rollover_retry_tri0')
+
+    @pytest.mark.parametrize('anyio_backend', ['asyncio', 'trio'])
+    @pytest.mark.anyio
+    async def test_failed_rollover_retry(anyio_backend, tmp_path):
+        missing = tmp_path / 'missing'
+        async with anyio.SpooledTemporaryFile(max_size=8, dir=missing) as f:
+            await f.write(b'aaaa')
+            with pytest.raises(FileNotFoundError):
+                await f.write(b'bbbbbbbb')
+>           assert await f.tell() == 12
+E           assert 0 == 12
+
+co-do-round2/track-d/probe_rollover.py:49: AssertionError
+=========================== short test summary info ============================
+FAILED co-do-round2/track-d/probe_rollover.py::test_failed_rollover_retry[asyncio]
+FAILED co-do-round2/track-d/probe_rollover.py::test_failed_rollover_retry[trio]
+========================= 2 failed, 2 passed in 0.06s ==========================
